@@ -20,6 +20,7 @@ public class App {
 
         //get("/hello", (req, res) -> "Hello World");
 
+
         get("/collection/:name", (request, response) -> {
 
             String name = request.params(":name");
@@ -36,11 +37,11 @@ public class App {
             return res;
         });
 
-        exception(QueryException.class, (exception, request, response) -> {
+        exception(BaseXException.class, (exception, request, response) -> {
             // Handle the exception here
 
-            //return exception.getMessage();
-            System.err.println(exception.getMessage());
+            response.status(404);
+            response.body(exception.getMessage());
         });
     }
 }
